@@ -5,6 +5,12 @@
 #include<algorithm>
 using namespace std;
 
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x):val(x),next(NULL){}
+};
+
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
@@ -23,6 +29,45 @@ public:
             }
         }
         return result;
+    }
+
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode *head = new ListNode(0);
+        ListNode *pre = head;
+        int a,b=0;
+        while(l1!=NULL && l2!=NULL){
+            a = l1->val+l2->val+b;
+            b = a/10;
+            a = a%10;
+            ListNode *n = new ListNode(a);
+            pre->next = n;
+            pre = n;
+            l1 = l1->next;
+            l2 = l2->next;
+        }
+        while(l1!=NULL){
+            a = l1->val+b;
+            b = a/10;
+            a = a%10;
+            ListNode *n = new ListNode(a);
+            pre->next = n;
+            pre = n;
+            l1 = l1->next;
+        }
+        while(l2!=NULL){
+            a = l2->val+b;
+            b = a/10;
+            a = a%10;
+            ListNode *n = new ListNode(a);
+            pre->next = n;
+            pre = n;
+            l2 = l2->next;
+        }
+        if(b>0){
+            ListNode *n = new ListNode(b);
+            pre->next = n;
+        }
+        return head->next;
     }
 };
 
