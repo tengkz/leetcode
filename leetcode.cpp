@@ -94,6 +94,31 @@ public:
         }
         return result;
     }
+
+    int lengthOfLongestSubstring(string s) {
+        vector<int> chars(1024);
+        for(int i=0;i<1024;i++){
+            chars[i]=-1;
+        }
+        int result = 0;
+        int last = 0;
+        int maxlen = 0;
+        for(int i=0;i<s.size();i++){
+            int x = (int)s[i];
+            if(chars[x]<last){
+                maxlen+=1;
+            }
+            else{
+                last = chars[x]+1;
+                maxlen = i-last+1;
+            }
+            chars[x] = i;
+            if(maxlen>result){
+                result=maxlen;
+            }
+        }
+        return result;
+    }
 };
 
 int main()
