@@ -69,6 +69,31 @@ public:
         }
         return head->next;
     }
+
+    int countCharacters(vector<string>& words, string chars) {
+        vector<int> vec(26);
+        for(int i=0;i<chars.size();i++)
+            vec[chars[i]-'a']++;
+        int result = 0;
+        for(int i=0;i<words.size();i++){
+            vector<int> t(26);
+            for(int j=0;j<26;j++){
+                t[j] = vec[j];
+            }
+            int flag=1;
+            for(int j=0;j<words[i].size();j++){
+                t[words[i][j]-'a']--;
+                if(t[words[i][j]-'a']<0){
+                    flag=0;
+                    break;
+                }
+            }
+            if(flag==1){
+                result+=words[i].size();
+            }
+        }
+        return result;
+    }
 };
 
 int main()
